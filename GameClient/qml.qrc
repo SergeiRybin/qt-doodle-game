@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>GameButton.qml</file>
+        <file>WelcomeScreen.qml</file>
+        <file>GameSelectionScreen.qml</file>
+    </qresource>
+</RCC>
