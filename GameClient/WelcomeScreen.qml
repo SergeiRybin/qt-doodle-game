@@ -20,7 +20,10 @@ Rectangle {
         height: 100
         anchors.centerIn: parent
         btnText: "Play"
-        onButtonClicked: pageLoader.source = "GameSelectionScreen.qml"
+        onButtonClicked: {
+            pageLoader.source = "GameSelectionScreen.qml"
+            manager.connectToServer()
+        }
     }
 
     GameButton

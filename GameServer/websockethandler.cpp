@@ -15,11 +15,11 @@ void WebSocketHandler::onConnect()
     QWebSocket *sock = m_server->nextPendingConnection();
     connect(sock, &QWebSocket::textMessageReceived, this, &WebSocketHandler::onMessageReceived);
     connect(sock, &QWebSocket::disconnected, this, &WebSocketHandler::onDisconnect);
-    QString id;
-    while (QString::number(rndGen.bounded(idMin, idMax)) && !m_sockets.contains(id))
-    {
-        m_sockets[id] = sock;
-    }
+    size_t id;
+    do {
+        id = rndGen.bounded(idMin, idMax);
+    } while (m_sockets.contains(id));
+    m_sockets[id] = sock;
 }
 
 void WebSocketHandler::onDisconnect()
@@ -28,7 +28,8 @@ void WebSocketHandler::onDisconnect()
     QWebSocket *client = qobject_cast<QWebSocket *>(sender());
     if (client)
     {
-        m_sockets.removeAll(client);
+        auto key = m_sockets.key(client);
+        m_sockets.remove(key);
         client->deleteLater();
     }
 
@@ -37,4 +38,10 @@ void WebSocketHandler::onDisconnect()
 void WebSocketHandler::onMessageReceived(QString msg)
 {
     qDebug() << "Server: Message received : " << msg;
+    QWebSocket *client = qobject_cast<QWebSocket *>(sender());
+    if (client)
+    {
+        size_t id = m_sockets.key(client);
+        emit messageReceived(msg, id);
+    }
 }

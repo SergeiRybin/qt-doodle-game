@@ -1,9 +1,9 @@
 #include <QCoreApplication>
-#include <websockethandler.h>
+#include <gamemanager.h>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    WebSocketHandler hndlr{};
+    GameManager manager;
     return a.exec();
 }

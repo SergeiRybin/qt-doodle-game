@@ -24,6 +24,7 @@ Rectangle {
             topMargin: 40
         }
         btnText: "Create Game"
+        onButtonClicked: manager.onNewGameRequest()
     }
 
     GameButton
@@ -37,6 +38,7 @@ Rectangle {
             topMargin: 20
         }
         btnText: "Join Game"
+        onButtonClicked: manager.onJoinGameRequest(1)
     }
 
     GameButton

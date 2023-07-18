@@ -9,6 +9,7 @@ CONFIG += c++17 cmdline
 SOURCES += \
         gamemanager.cpp \
         main.cpp \
+        messagehandler.cpp \
         websockethandler.cpp
 
 # Default rules for deployment.
@@ -18,4 +19,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     gamemanager.h \
-    websockethandler.h
+    messagehandler.h \
+    websockethandler.h \
+    ../common/Headers/common.h
